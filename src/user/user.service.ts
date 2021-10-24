@@ -39,7 +39,6 @@ export class UserService {
     const session = new Session();
     session.user = user;
     await this.connection.transaction(async (manager: EntityManager) => {
-      await manager.save(user);
       await manager.save(session);
     });
 

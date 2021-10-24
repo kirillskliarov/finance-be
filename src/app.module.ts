@@ -1,20 +1,20 @@
-import { ClassSerializerInterceptor, Module, ValidationPipe } from '@nestjs/common';
+import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
-import { configFactory } from './config/configFactory';
+import { configFactory } from './appCore/config/configFactory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { UserModule } from './user/user.module';
-import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { BrokerModule } from './broker/broker.module';
 import { AccountModule } from './account/account.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
 import { DealModule } from './deal/deal.module';
 import { entities } from './entities/entities';
-import { TransformInterceptor } from './interceptors/Transform.interceptor';
 import { AuthModule } from './auth/auth.module';
 import { SessionModule } from './session/session.module';
-import { TokenAuthGuard } from './auth/guards/token-auth.guard';
+import { interceptorProviders } from './appCore/providers/interceptor.providers';
+import { pipeProviders } from './appCore/providers/pipe.providers';
+import { guardProviders } from './appCore/providers/guard.providers';
 
 @Module({
   imports: [
@@ -43,25 +43,9 @@ import { TokenAuthGuard } from './auth/guards/token-auth.guard';
   controllers: [AppController],
   providers: [
     AppService,
-    {
-      provide: APP_PIPE,
-      useValue: new ValidationPipe({
-        whitelist: true,
-        transform: true,
-      }),
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: ClassSerializerInterceptor,
-    },
-    {
-      provide: APP_INTERCEPTOR,
-      useClass: TransformInterceptor,
-    },
-    {
-      provide: APP_GUARD,
-      useClass: TokenAuthGuard,
-    },
+    ...pipeProviders,
+    ...interceptorProviders,
+    ...guardProviders,
   ],
 })
 export class AppModule {}

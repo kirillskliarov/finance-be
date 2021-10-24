@@ -1,4 +1,4 @@
-import { parseBoolean } from "../libs/parseBoolean";
+import { parseBoolean } from '../libs/parseBoolean';
 
 export const configFactory = () => {
   return {

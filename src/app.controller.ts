@@ -19,7 +19,8 @@ export class AppController {
 
   @Public()
   @Get()
-  getHello(): string {
+  getHello(@CurrentUser() user: User): string {
+    debugger;
     return this.appService.getHello();
   }
 
