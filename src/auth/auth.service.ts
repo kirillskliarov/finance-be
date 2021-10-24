@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { UserService } from '../user/user.service';
-import { User } from '../entities/User';
+import { User } from '../appCore/entities/User';
 import * as bcrypt from 'bcrypt';
 import { SessionService } from '../session/session.service';
 

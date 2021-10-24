@@ -9,7 +9,7 @@ import { BrokerModule } from './broker/broker.module';
 import { AccountModule } from './account/account.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
 import { DealModule } from './deal/deal.module';
-import { entities } from './entities/entities';
+import { entities } from './appCore/entities/entities';
 import { AuthModule } from './auth/auth.module';
 import { SessionModule } from './session/session.module';
 import { interceptorProviders } from './appCore/providers/interceptor.providers';

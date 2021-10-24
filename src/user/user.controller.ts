@@ -1,8 +1,8 @@
 import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDTO } from './DTOs/CreateUserDTO';
 import { UserService } from './user.service';
-import { Session } from '../entities/Session';
-import { User } from '../entities/User';
+import { Session } from '../appCore/entities/Session';
+import { User } from '../appCore/entities/User';
 import { CurrentUser } from '../decorators/CurrentUser.decorator';
 import { PasswordAuthGuard } from '../auth/guards/password-auth.guard';
 import { Public } from '../decorators/Public.decorator';

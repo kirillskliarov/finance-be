@@ -8,9 +8,9 @@ import {
 } from 'typeorm';
 import { User } from './User';
 import { DateTime } from 'luxon';
-import { dateTimeSQLTransformer } from '../appCore/libs/DateTimeSQLTransformer';
+import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { DateTimeClassTransformer } from '../appCore/libs/DateTimeClassTransformer';
+import { DateTimeClassTransformer } from '../libs/DateTimeClassTransformer';
 
 @Entity()
 @Exclude()
