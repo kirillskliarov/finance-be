@@ -6,11 +6,13 @@ import { configFactory } from './config/configFactory';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { User } from './entities/User';
 import { UserModule } from './user/user.module';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { BrokerModule } from './broker/broker.module';
 import { AccountModule } from './account/account.module';
 import { PortfolioModule } from './portfolio/portfolio.module';
 import { DealModule } from './deal/deal.module';
+import { entities } from './entities/entities';
+import { TransformInterceptor } from './interceptors/Transform.interceptor';
 
 @Module({
   imports: [
@@ -23,7 +25,7 @@ import { DealModule } from './deal/deal.module';
       useFactory: (config: ConfigService) => {
         return {
           ...config.get('database'),
-          entities: [User],
+          entities: [...entities],
         };
       },
       inject: [ConfigService],
@@ -43,6 +45,10 @@ import { DealModule } from './deal/deal.module';
         whitelist: true,
         transform: true,
       }),
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: TransformInterceptor,
     },
   ],
 })

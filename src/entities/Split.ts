@@ -1,6 +1,6 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { DateTime } from 'luxon';
-import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
+import { dateTimeSQLTransformer } from '../libs/dateTimeSQLTransformer';
 
 @Entity()
 export class Split {

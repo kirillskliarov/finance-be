@@ -2,6 +2,7 @@ import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { Account } from './Account';
 import { Portfolio } from './Portfolio';
+import { Session } from './Session';
 
 @Entity()
 @Exclude()
@@ -26,4 +27,7 @@ export class User {
 
   @OneToMany(() => Portfolio, (portfolio: Portfolio) => portfolio.user)
   portfolios: Portfolio[];
+
+  @OneToMany(() => Session, (session: Session) => session.user)
+  sessions: Session[];
 }

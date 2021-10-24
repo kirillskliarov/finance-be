@@ -8,6 +8,7 @@ import { Security } from './Security';
 import { Split } from './Split';
 import { Tax } from './Tax';
 import { User } from './User';
+import { Session } from './Session';
 
 export const entities = [
   Account,
@@ -17,6 +18,7 @@ export const entities = [
   Portfolio,
   PortfolioTax,
   Security,
+  Session,
   Split,
   Tax,
   User,
