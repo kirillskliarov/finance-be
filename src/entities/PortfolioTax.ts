@@ -1,8 +1,10 @@
 import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Portfolio } from './Portfolio';
 import { Tax } from './Tax';
+import { Exclude, Expose } from 'class-transformer';
 
 @Entity()
+@Exclude()
 export class PortfolioTax {
   @PrimaryGeneratedColumn()
   id: number;
@@ -17,7 +19,8 @@ export class PortfolioTax {
   @ManyToOne(() => Tax, (tax: Tax) => tax.portfolioTaxes, { nullable: false })
   tax: Tax;
 
-  // TODO: add restriction (0 < portion && portion < 1)
+  // TODO: think about: percentage or absolute value?
   @Column({ nullable: false })
+  @Expose()
   portion: number;
 }

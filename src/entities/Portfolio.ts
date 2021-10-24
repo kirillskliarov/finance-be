@@ -5,12 +5,13 @@ import {
   OneToMany,
   PrimaryGeneratedColumn,
 } from 'typeorm';
-import { Expose } from 'class-transformer';
+import { Exclude, Expose } from 'class-transformer';
 import { User } from './User';
 import { Deal } from './Deal';
 import { PortfolioTax } from './PortfolioTax';
 
 @Entity()
+@Exclude()
 export class Portfolio {
   @PrimaryGeneratedColumn()
   id: number;

@@ -1,11 +1,4 @@
-import {
-  Body,
-  ClassSerializerInterceptor,
-  Controller,
-  Post,
-  UseGuards,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Post, UseGuards } from '@nestjs/common';
 import { CreateUserDTO } from './DTOs/CreateUserDTO';
 import { UserService } from './user.service';
 import { Session } from '../entities/Session';
@@ -14,7 +7,6 @@ import { CurrentUser } from '../decorators/CurrentUser.decorator';
 import { PasswordAuthGuard } from '../auth/guards/password-auth.guard';
 import { Public } from '../decorators/Public.decorator';
 
-@UseInterceptors(ClassSerializerInterceptor)
 @Controller('user')
 export class UserController {
   constructor(private readonly userService: UserService) {}
@@ -26,8 +18,9 @@ export class UserController {
     return this.userService.login(user);
   }
 
+  @Public()
   @Post()
   async create(@Body() createUserDTO: CreateUserDTO): Promise<Session> {
-    return this.userService.create(createUserDTO);
+    return await this.userService.create(createUserDTO);
   }
 }

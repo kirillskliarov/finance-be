@@ -1,0 +1,14 @@
+import { Body, Controller, Post } from '@nestjs/common';
+import { BrokerService } from './broker.service';
+import { Broker } from '../entities/Broker';
+import { CreateBrokerDTO } from './DTOs/CreateBrokerDTO';
+
+@Controller('broker')
+export class BrokerController {
+  constructor(private readonly brokerService: BrokerService) {}
+
+  @Post()
+  async create(@Body() createBrokerDTO: CreateBrokerDTO): Promise<Broker> {
+    return this.brokerService.create(createBrokerDTO);
+  }
+}

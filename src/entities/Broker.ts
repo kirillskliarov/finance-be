@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn, Unique } from 'typeorm';
+import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from './Account';
 
 @Entity()

@@ -1,4 +1,13 @@
 import { Module } from '@nestjs/common';
+import { BrokerController } from './broker.controller';
+import { BrokerService } from './broker.service';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { Broker } from '../entities/Broker';
 
-@Module({})
+@Module({
+  imports: [TypeOrmModule.forFeature([Broker])],
+  // exports: [TypeOrmModule],
+  controllers: [BrokerController],
+  providers: [BrokerService],
+})
 export class BrokerModule {}

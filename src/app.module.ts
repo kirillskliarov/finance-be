@@ -1,10 +1,9 @@
-import { Module, ValidationPipe } from '@nestjs/common';
+import { ClassSerializerInterceptor, Module, ValidationPipe } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { configFactory } from './config/configFactory';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { User } from './entities/User';
 import { UserModule } from './user/user.module';
 import { APP_GUARD, APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { BrokerModule } from './broker/broker.module';
@@ -50,6 +49,10 @@ import { TokenAuthGuard } from './auth/guards/token-auth.guard';
         whitelist: true,
         transform: true,
       }),
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ClassSerializerInterceptor,
     },
     {
       provide: APP_INTERCEPTOR,

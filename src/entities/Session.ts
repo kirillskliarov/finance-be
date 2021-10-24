@@ -1,9 +1,16 @@
-import { BeforeInsert, Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  BeforeInsert,
+  Column,
+  Entity,
+  Generated,
+  ManyToOne,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { User } from './User';
 import { DateTime } from 'luxon';
-import { dateTimeSQLTransformer } from '../libs/dateTimeSQLTransformer';
+import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { dateTimeClassTransformer } from '../libs/dateTimeClassTransformer';
+import { DateTimeClassTransformer } from '../libs/DateTimeClassTransformer';
 
 @Entity()
 @Exclude()
@@ -28,7 +35,7 @@ export class Session {
     transformer: dateTimeSQLTransformer,
   })
   @Expose()
-  @Transform(dateTimeClassTransformer, { toPlainOnly: true })
+  @Transform(DateTimeClassTransformer.toPlain, { toPlainOnly: true })
   createdAt: DateTime;
 
   @Column({
@@ -37,7 +44,7 @@ export class Session {
     transformer: dateTimeSQLTransformer,
   })
   @Expose()
-  @Transform(dateTimeClassTransformer, { toPlainOnly: true })
+  @Transform(DateTimeClassTransformer.toPlain, { toPlainOnly: true })
   updatedAt: DateTime;
 
   @BeforeInsert()
