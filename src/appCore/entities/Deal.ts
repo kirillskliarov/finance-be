@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from './Account';
 import { Security } from './Security';
 import { Portfolio } from './Portfolio';
@@ -9,6 +9,11 @@ import { Exclude, Expose } from 'class-transformer';
 export class Deal {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     nullable: false,

@@ -20,7 +20,7 @@ export class Session {
 
   @Column()
   @Generated('uuid')
-  @Expose()
+  @Expose({ toPlainOnly: true })
   uuid: string;
 
   @ManyToOne(() => User, (user: User) => user.sessions, {
@@ -30,7 +30,7 @@ export class Session {
   user: User;
 
   @Column({
-    type: 'date',
+    type: 'timestamptz',
     nullable: false,
     transformer: dateTimeSQLTransformer,
   })
@@ -39,7 +39,7 @@ export class Session {
   createdAt: DateTime;
 
   @Column({
-    type: 'date',
+    type: 'timestamptz',
     nullable: false,
     transformer: dateTimeSQLTransformer,
   })

@@ -1,5 +1,5 @@
 import { Exclude, Expose } from 'class-transformer';
-import { Column, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from './Account';
 
 @Entity()
@@ -7,6 +7,11 @@ import { Account } from './Account';
 export class Broker {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     unique: true,

@@ -5,8 +5,8 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { User } from './appCore/entities/User';
 import { Repository } from 'typeorm';
 import { AuthGuard } from '@nestjs/passport';
-import { CurrentUser } from './decorators/CurrentUser.decorator';
-import { Public } from './decorators/Public.decorator';
+import { CurrentUser } from './appCore/decorators/CurrentUser.decorator';
+import { Public } from './appCore/decorators/Public.decorator';
 
 @Controller()
 export class AppController {

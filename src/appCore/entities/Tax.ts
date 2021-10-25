@@ -1,6 +1,6 @@
 import {
   Column,
-  Entity,
+  Entity, Generated,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn,
@@ -14,6 +14,11 @@ import { Exclude, Expose } from 'class-transformer';
 export class Tax {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     nullable: false,

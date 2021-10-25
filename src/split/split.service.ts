@@ -1,0 +1,35 @@
+import { HttpException, Injectable } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { Split } from '../appCore/entities/Split';
+import { Repository } from 'typeorm';
+import { CreateSplitDTO } from './DTOs/CreateSplitDTO';
+import { Security } from '../appCore/entities/Security';
+import { plainToClass } from 'class-transformer';
+
+@Injectable()
+export class SplitService {
+  constructor(
+    @InjectRepository(Split)
+    private readonly splitRepository: Repository<Split>,
+    @InjectRepository(Security)
+    private readonly securityRepository: Repository<Security>,
+  ) {}
+
+  async create(createSplitDTO: CreateSplitDTO): Promise<Split> {
+    const security = await this.securityRepository.findOne({
+      uuid: createSplitDTO.securityUUID,
+    });
+
+    if (!security) {
+      throw new HttpException(
+        `Security UUID ${createSplitDTO.securityUUID} not found`,
+        400,
+      );
+    }
+
+    const split = plainToClass(Split, createSplitDTO);
+    split.security = security;
+
+    return this.splitRepository.save(split);
+  }
+}

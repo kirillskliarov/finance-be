@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from './Account';
 import { Exclude, Expose } from 'class-transformer';
 
@@ -7,6 +7,11 @@ import { Exclude, Expose } from 'class-transformer';
 export class InOut {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     nullable: false,

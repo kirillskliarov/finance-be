@@ -1,8 +1,9 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { DateTime } from 'luxon';
 import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
 import { Exclude, Expose, Transform } from 'class-transformer';
 import { DateTimeClassTransformer } from '../libs/DateTimeClassTransformer';
+import { Security } from './Security';
 
 @Entity()
 @Exclude()
@@ -10,8 +11,13 @@ export class Split {
   @PrimaryGeneratedColumn()
   id: number;
 
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
+
   @Column({
-    type: 'date',
+    type: 'timestamptz',
     nullable: false,
     transformer: dateTimeSQLTransformer,
   })
@@ -24,4 +30,7 @@ export class Split {
   })
   @Expose()
   value: number;
+
+  @ManyToOne(() => Security, (security: Security) => security.splits)
+  security: Security;
 }

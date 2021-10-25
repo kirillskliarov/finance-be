@@ -1,7 +1,7 @@
 import { Exclude, Expose } from 'class-transformer';
 import {
   Column,
-  Entity,
+  Entity, Generated,
   ManyToOne,
   OneToMany,
   PrimaryGeneratedColumn, Unique,
@@ -13,11 +13,16 @@ import { InOut } from './InOut';
 import { Tax } from './Tax';
 
 @Entity()
-@Unique(['broker', 'user'])
+@Unique('name_broker_user', ['name', 'broker', 'user'])
 @Exclude()
 export class Account {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     nullable: false,
@@ -28,6 +33,7 @@ export class Account {
   @ManyToOne(() => Broker, (broker: Broker) => broker.accounts, {
     nullable: false,
   })
+  @Expose()
   broker: Broker;
 
   @ManyToOne(() => User, (user: User) => user.accounts, { nullable: false })

@@ -15,6 +15,9 @@ import { SessionModule } from './session/session.module';
 import { interceptorProviders } from './appCore/providers/interceptor.providers';
 import { pipeProviders } from './appCore/providers/pipe.providers';
 import { guardProviders } from './appCore/providers/guard.providers';
+import { SecurityModule } from './security/security.module';
+import { InOutModule } from './in-out/in-out.module';
+import { SplitModule } from './split/split.module';
 
 @Module({
   imports: [
@@ -39,6 +42,9 @@ import { guardProviders } from './appCore/providers/guard.providers';
     DealModule,
     AuthModule,
     SessionModule,
+    SecurityModule,
+    InOutModule,
+    SplitModule,
   ],
   controllers: [AppController],
   providers: [

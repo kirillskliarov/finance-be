@@ -1,9 +1,9 @@
 import {
   Column,
-  Entity,
+  Entity, Generated,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn,
+  PrimaryGeneratedColumn, Unique,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { User } from './User';
@@ -11,10 +11,16 @@ import { Deal } from './Deal';
 import { PortfolioTax } from './PortfolioTax';
 
 @Entity()
+@Unique('name_user', ['name', 'user'])
 @Exclude()
 export class Portfolio {
   @PrimaryGeneratedColumn()
   id: number;
+
+  @Column()
+  @Generated('uuid')
+  @Expose({ toPlainOnly: true })
+  uuid: string;
 
   @Column({
     nullable: false,

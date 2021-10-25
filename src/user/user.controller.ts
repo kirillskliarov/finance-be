@@ -3,9 +3,9 @@ import { CreateUserDTO } from './DTOs/CreateUserDTO';
 import { UserService } from './user.service';
 import { Session } from '../appCore/entities/Session';
 import { User } from '../appCore/entities/User';
-import { CurrentUser } from '../decorators/CurrentUser.decorator';
+import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { PasswordAuthGuard } from '../auth/guards/password-auth.guard';
-import { Public } from '../decorators/Public.decorator';
+import { Public } from '../appCore/decorators/Public.decorator';
 
 @Controller('user')
 export class UserController {

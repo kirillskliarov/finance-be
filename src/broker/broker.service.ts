@@ -14,9 +14,6 @@ export class BrokerService {
 
   async create(createBrokerDTO: CreateBrokerDTO): Promise<Broker> {
     const broker: Broker = plainToClass(Broker, createBrokerDTO);
-    debugger;
-    const result = await this.brokerRepository.save(broker);
-    debugger;
-    return result;
+    return this.brokerRepository.save(broker);
   }
 }

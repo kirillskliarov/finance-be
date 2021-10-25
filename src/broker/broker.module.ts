@@ -6,7 +6,7 @@ import { Broker } from '../appCore/entities/Broker';
 
 @Module({
   imports: [TypeOrmModule.forFeature([Broker])],
-  // exports: [TypeOrmModule],
+  exports: [TypeOrmModule],
   controllers: [BrokerController],
   providers: [BrokerService],
 })
