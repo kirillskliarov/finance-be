@@ -2,8 +2,8 @@ import { Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'ty
 import { DateTime } from 'luxon';
 import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { DateTimeClassTransformer } from '../libs/DateTimeClassTransformer';
 import { Security } from './Security';
+import { dateTimeTransformer } from '../libs/dateTimeTransformer';
 
 @Entity()
 @Exclude()
@@ -22,7 +22,7 @@ export class Split {
     transformer: dateTimeSQLTransformer,
   })
   @Expose()
-  @Transform(DateTimeClassTransformer.toPlain, { toPlainOnly: true })
+  @Transform(dateTimeTransformer)
   date: DateTime;
 
   @Column({

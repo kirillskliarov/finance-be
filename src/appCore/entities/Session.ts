@@ -10,7 +10,7 @@ import { User } from './User';
 import { DateTime } from 'luxon';
 import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
 import { Exclude, Expose, Transform } from 'class-transformer';
-import { DateTimeClassTransformer } from '../libs/DateTimeClassTransformer';
+import { dateTimeTransformer } from '../libs/dateTimeTransformer';
 
 @Entity()
 @Exclude()
@@ -35,7 +35,7 @@ export class Session {
     transformer: dateTimeSQLTransformer,
   })
   @Expose()
-  @Transform(DateTimeClassTransformer.toPlain, { toPlainOnly: true })
+  @Transform(dateTimeTransformer)
   createdAt: DateTime;
 
   @Column({
@@ -44,7 +44,7 @@ export class Session {
     transformer: dateTimeSQLTransformer,
   })
   @Expose()
-  @Transform(DateTimeClassTransformer.toPlain, { toPlainOnly: true })
+  @Transform(dateTimeTransformer)
   updatedAt: DateTime;
 
   @BeforeInsert()
