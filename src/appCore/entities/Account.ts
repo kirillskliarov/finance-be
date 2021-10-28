@@ -1,4 +1,4 @@
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 import {
   Column,
   Entity, Generated,
@@ -34,6 +34,7 @@ export class Account {
     nullable: false,
   })
   @Expose()
+  @Type(() => Broker)
   broker: Broker;
 
   @ManyToOne(() => User, (user: User) => user.accounts, { nullable: false })

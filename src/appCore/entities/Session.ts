@@ -9,7 +9,7 @@ import {
 import { User } from './User';
 import { DateTime } from 'luxon';
 import { dateTimeSQLTransformer } from '../libs/DateTimeSQLTransformer';
-import { Exclude, Expose, Transform } from 'class-transformer';
+import { Exclude, Expose, Transform, Type } from 'class-transformer';
 import { dateTimeTransformer } from '../libs/dateTimeTransformer';
 
 @Entity()
@@ -27,6 +27,7 @@ export class Session {
     nullable: false,
   })
   @Expose()
+  @Type(() => User)
   user: User;
 
   @Column({

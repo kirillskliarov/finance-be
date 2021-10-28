@@ -1,6 +1,6 @@
 import { Column, Entity, Generated, ManyToOne, PrimaryGeneratedColumn } from 'typeorm';
 import { Account } from './Account';
-import { Exclude, Expose } from 'class-transformer';
+import { Exclude, Expose, Type } from 'class-transformer';
 
 @Entity()
 @Exclude()
@@ -23,5 +23,6 @@ export class InOut {
     nullable: false,
   })
   @Expose()
+  @Type(() => Account)
   account: Account;
 }
