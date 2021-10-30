@@ -1,9 +1,13 @@
-import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
+import { IsDate, IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
 
 export class CreateDealDTO {
   @IsNotEmpty()
   @IsNumber()
   amount: string;
+
+  @IsNotEmpty()
+  @IsDate()
+  dateTime: string;
 
   @IsNotEmpty()
   @IsNumber()

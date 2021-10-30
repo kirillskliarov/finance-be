@@ -1,9 +1,11 @@
 import {
   Column,
-  Entity, Generated,
+  Entity,
+  Generated,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn, Unique,
+  PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { User } from './User';
@@ -32,11 +34,13 @@ export class Portfolio {
   user: User;
 
   @OneToMany(() => Deal, (deal: Deal) => deal.portfolio)
+  @Expose()
   deals: Deal[];
 
   @OneToMany(
     () => PortfolioTax,
     (portfolioTax: PortfolioTax) => portfolioTax.portfolio,
   )
+  @Expose()
   portfolioTaxes: PortfolioTax[];
 }

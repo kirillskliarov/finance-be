@@ -1,10 +1,12 @@
 import { Exclude, Expose, Type } from 'class-transformer';
 import {
   Column,
-  Entity, Generated,
+  Entity,
+  Generated,
   ManyToOne,
   OneToMany,
-  PrimaryGeneratedColumn, Unique,
+  PrimaryGeneratedColumn,
+  Unique,
 } from 'typeorm';
 import { Broker } from './Broker';
 import { User } from './User';

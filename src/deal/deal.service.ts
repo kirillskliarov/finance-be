@@ -45,4 +45,23 @@ export class DealService {
 
     return this.dealRepository.save(deal);
   }
+
+  async find(user: User): Promise<Deal[]> {
+    const accounts = await this.accountRepository.find({
+      user,
+    });
+
+    if (accounts.length === 0) {
+      return [];
+    }
+
+    return this.dealRepository.find({
+      where: {
+        account: accounts,
+      },
+      order: {
+        dateTime: 'ASC',
+      },
+    });
+  }
 }

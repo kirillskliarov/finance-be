@@ -34,4 +34,13 @@ export class AccountService {
     account.broker = broker;
     return this.accountRepository.save(account);
   }
+
+  async getAll(user: User): Promise<Account[]> {
+    return this.accountRepository.find({
+      where: {
+        user,
+      },
+      relations: ['broker'],
+    });
+  }
 }

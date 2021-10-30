@@ -1,7 +1,8 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { SecurityService } from './security.service';
 import { Security } from '../appCore/entities/Security';
 import { CreateSecurityDTO } from './DTOs/CreateSecurityDTO';
+import { FindSecurityDTO } from './DTOs/FindSecurityDTO';
 
 @Controller('security')
 export class SecurityController {
@@ -12,5 +13,10 @@ export class SecurityController {
     @Body() createSecurityDTO: CreateSecurityDTO,
   ): Promise<Security> {
     return this.securityService.create(createSecurityDTO);
+  }
+
+  @Get()
+  async find(@Query() findSecurityDTO: FindSecurityDTO): Promise<Security[]> {
+    return this.securityService.find(findSecurityDTO);
   }
 }

@@ -1,4 +1,10 @@
-import { Column, Entity, Generated, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
+import {
+  Column,
+  Entity,
+  Generated,
+  OneToMany,
+  PrimaryGeneratedColumn,
+} from 'typeorm';
 import { Exclude, Expose } from 'class-transformer';
 import { Account } from './Account';
 import { Portfolio } from './Portfolio';

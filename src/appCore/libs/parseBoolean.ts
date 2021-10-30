@@ -1,3 +1,3 @@
 export function parseBoolean(value: string): boolean {
-  return value.toLowerCase() === String(true);
+  return String(value).toLowerCase() === String(true);
 }

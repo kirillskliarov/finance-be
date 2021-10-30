@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Account } from '../appCore/entities/Account';
 import { CreateAccountDTO } from './DTOs/CreateAccountDTO';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
@@ -15,5 +15,10 @@ export class AccountController {
     @CurrentUser() user: User,
   ): Promise<Account> {
     return this.accountService.create(createAccountDTO, user);
+  }
+
+  @Get()
+  async getAll(@CurrentUser() user: User): Promise<Account[]> {
+    return this.accountService.getAll(user);
   }
 }

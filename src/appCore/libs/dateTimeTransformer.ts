@@ -9,7 +9,9 @@ export function dateTimeToPlainTransformer(value: DateTime): string {
   return value.toISO();
 }
 
-export function dateTimeTransformer(params: TransformFnParams): DateTime | string {
+export function dateTimeTransformer(
+  params: TransformFnParams,
+): DateTime | string {
   switch (params.type) {
     case TransformationType.PLAIN_TO_CLASS:
       return dateTimeToClassTransformer(params.value);

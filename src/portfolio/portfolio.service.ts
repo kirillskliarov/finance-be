@@ -21,4 +21,17 @@ export class PortfolioService {
     portfolio.user = user;
     return this.portfolioRepository.save(portfolio);
   }
+
+  async getAll(user: User): Promise<Portfolio[]> {
+    return this.portfolioRepository.find({ user });
+  }
+
+  async getByUUID(uuid: string, user: User): Promise<Portfolio | undefined> {
+    return (
+      (await this.portfolioRepository.findOne(
+        { uuid, user },
+        { relations: ['deals', 'portfolioTaxes'] },
+      )) ?? null
+    );
+  }
 }

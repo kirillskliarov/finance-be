@@ -20,7 +20,6 @@ export class AppController {
   @Public()
   @Get()
   getHello(@CurrentUser() user: User): string {
-    debugger;
     return this.appService.getHello();
   }
 

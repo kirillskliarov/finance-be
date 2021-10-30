@@ -16,4 +16,8 @@ export class BrokerService {
     const broker: Broker = plainToClass(Broker, createBrokerDTO);
     return this.brokerRepository.save(broker);
   }
+
+  async getAll(): Promise<Broker[]> {
+    return this.brokerRepository.find();
+  }
 }
