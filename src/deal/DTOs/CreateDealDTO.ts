@@ -11,19 +11,23 @@ export class CreateDealDTO {
 
   @IsNotEmpty()
   @IsNumber()
-  price: string;
+  price: number;
 
   @IsNotEmpty()
   @IsNumber()
-  brokerFee: string;
+  brokerFee: number;
 
   @IsNotEmpty()
   @IsNumber()
-  exchangeFee: string;
+  exchangeFee: number;
 
   @IsNotEmpty()
   @IsUUID()
   securityUUID: string;
+
+  @IsNotEmpty()
+  @IsUUID()
+  currencyUUID: string;
 
   @IsNotEmpty()
   @IsUUID()

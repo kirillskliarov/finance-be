@@ -7,6 +7,7 @@ import { User } from '../appCore/entities/User';
 import { Account } from '../appCore/entities/Account';
 import { Security } from '../appCore/entities/Security';
 import { plainToClass } from 'class-transformer';
+import { SecurityType } from '../appCore/entities/SecurityType';
 
 @Injectable()
 export class DealService {
@@ -39,9 +40,22 @@ export class DealService {
         400,
       );
     }
+    const currency = await this.securityRepository.findOne({
+      where: {
+        uuid: createDealDTO.currencyUUID,
+        type: SecurityType.CURRENCY,
+      },
+    });
+    if (!currency) {
+      throw new HttpException(
+        `Currency UUID ${createDealDTO.currencyUUID} not found`,
+        400,
+      );
+    }
     const deal = plainToClass(Deal, createDealDTO);
     deal.account = account;
     deal.security = security;
+    deal.currency = currency;
 
     return this.dealRepository.save(deal);
   }
