@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Security } from '../appCore/entities/Security';
-import { Repository } from 'typeorm';
+import { ILike, Like, Repository } from 'typeorm';
 import { CreateSecurityDTO } from './DTOs/CreateSecurityDTO';
 import { plainToClass } from 'class-transformer';
 import { FindSecurityDTO } from './DTOs/FindSecurityDTO';
@@ -19,10 +19,22 @@ export class SecurityService {
   }
 
   async find(findSecurityDTO: FindSecurityDTO): Promise<Security[]> {
+    const where: Record<string, any> = {};
+    for (const key in findSecurityDTO) {
+      switch (key) {
+        case 'secidLike': {
+          const value = findSecurityDTO['secidLike'];
+          where.secid = ILike(`%${value}%`);
+          break;
+        }
+        case 'type': {
+          where.type = findSecurityDTO['type'];
+          break;
+        }
+      }
+    }
     return this.securityRepository.find({
-      where: {
-        secid: findSecurityDTO.secid,
-      },
+      where: where,
     });
   }
 }
