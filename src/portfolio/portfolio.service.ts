@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Portfolio } from '../appCore/entities/Portfolio';
-import { CreatePortfolioDTO } from './DTOs/CreatePortfolioDTO';
+import { CreatePortfolioDTO } from '../appCore/DTOs/CreatePortfolioDTO';
 import { plainToClass } from 'class-transformer';
 import { User } from '../appCore/entities/User';
 

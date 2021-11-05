@@ -9,7 +9,7 @@ import {
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
 import { PortfolioService } from './portfolio.service';
-import { CreatePortfolioDTO } from './DTOs/CreatePortfolioDTO';
+import { CreatePortfolioDTO } from '../appCore/DTOs/CreatePortfolioDTO';
 import { Portfolio } from '../appCore/entities/Portfolio';
 
 @Controller('portfolio')

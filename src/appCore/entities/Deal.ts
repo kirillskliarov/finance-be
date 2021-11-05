@@ -40,18 +40,21 @@ export class Deal {
   amount: number;
 
   @Column({
+    type: 'float',
     nullable: false,
   })
   @Expose()
   price: number;
 
   @Column({
+    type: 'float',
     nullable: false,
   })
   @Expose()
   brokerFee: number;
 
   @Column({
+    type: 'float',
     nullable: false,
   })
   @Expose()

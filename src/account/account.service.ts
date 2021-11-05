@@ -3,7 +3,7 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, Repository } from 'typeorm';
 import { plainToClass } from 'class-transformer';
 import { Account } from '../appCore/entities/Account';
-import { CreateAccountDTO } from './DTOs/CreateAccountDTO';
+import { CreateAccountDTO } from '../appCore/DTOs/CreateAccountDTO';
 import { User } from '../appCore/entities/User';
 import { Broker } from '../appCore/entities/Broker';
 

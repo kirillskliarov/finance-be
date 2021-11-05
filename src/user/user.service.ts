@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Connection, EntityManager, Repository } from 'typeorm';
 import { User } from '../appCore/entities/User';
-import { CreateUserDTO } from './DTOs/CreateUserDTO';
+import { CreateUserDTO } from '../appCore/DTOs/CreateUserDTO';
 import { plainToClass } from 'class-transformer';
 import * as bcrypt from 'bcrypt';
 import { Session } from '../appCore/entities/Session';

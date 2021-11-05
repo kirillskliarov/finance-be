@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InOut } from '../appCore/entities/InOut';
 import { Repository } from 'typeorm';
-import { CreateInOutDTO } from './DTOs/CreateInOutDTO';
+import { CreateInOutDTO } from '../appCore/DTOs/CreateInOutDTO';
 import { User } from '../appCore/entities/User';
 import { Account } from '../appCore/entities/Account';
 import { plainToClass } from 'class-transformer';

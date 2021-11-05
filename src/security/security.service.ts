@@ -2,9 +2,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Security } from '../appCore/entities/Security';
 import { ILike, Like, Repository } from 'typeorm';
-import { CreateSecurityDTO } from './DTOs/CreateSecurityDTO';
+import { CreateSecurityDTO } from '../appCore/DTOs/CreateSecurityDTO';
 import { plainToClass } from 'class-transformer';
-import { FindSecurityDTO } from './DTOs/FindSecurityDTO';
+import { FindSecurityDTO } from '../appCore/DTOs/FindSecurityDTO';
 
 @Injectable()
 export class SecurityService {

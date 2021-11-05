@@ -2,12 +2,13 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Deal } from '../appCore/entities/Deal';
 import { Repository } from 'typeorm';
-import { CreateDealDTO } from './DTOs/CreateDealDTO';
+import { CreateDealDTO } from '../appCore/DTOs/CreateDealDTO';
 import { User } from '../appCore/entities/User';
 import { Account } from '../appCore/entities/Account';
 import { Security } from '../appCore/entities/Security';
 import { plainToClass } from 'class-transformer';
 import { SecurityType } from '../appCore/entities/SecurityType';
+import { Portfolio } from '../appCore/entities/Portfolio';
 
 @Injectable()
 export class DealService {
@@ -16,6 +17,8 @@ export class DealService {
     private readonly dealRepository: Repository<Deal>,
     @InjectRepository(Account)
     private readonly accountRepository: Repository<Account>,
+    @InjectRepository(Portfolio)
+    private readonly portfolioRepository: Repository<Portfolio>,
     @InjectRepository(Security)
     private readonly securityRepository: Repository<Security>,
   ) {}
@@ -23,32 +26,42 @@ export class DealService {
   async create(createDealDTO: CreateDealDTO, user: User): Promise<Deal> {
     const account = await this.accountRepository.findOne({
       user,
-      uuid: createDealDTO.accountUUID,
+      uuid: createDealDTO.account.uuid,
     });
     if (!account) {
       throw new HttpException(
-        `Account UUID ${createDealDTO.accountUUID} not found`,
+        `Account UUID ${createDealDTO.account.uuid} not found`,
+        400,
+      );
+    }
+    const portfolio = await this.portfolioRepository.findOne({
+      user,
+      uuid: createDealDTO.portfolio.uuid,
+    });
+    if (!portfolio) {
+      throw new HttpException(
+        `Portfolio UUID ${createDealDTO.portfolio.uuid} not found`,
         400,
       );
     }
     const security = await this.securityRepository.findOne({
-      uuid: createDealDTO.securityUUID,
+      uuid: createDealDTO.security.uuid,
     });
     if (!security) {
       throw new HttpException(
-        `Security UUID ${createDealDTO.securityUUID} not found`,
+        `Security UUID ${createDealDTO.security.uuid} not found`,
         400,
       );
     }
     const currency = await this.securityRepository.findOne({
       where: {
-        uuid: createDealDTO.currencyUUID,
+        uuid: createDealDTO.currency.uuid,
         type: SecurityType.CURRENCY,
       },
     });
     if (!currency) {
       throw new HttpException(
-        `Currency UUID ${createDealDTO.currencyUUID} not found`,
+        `Currency UUID ${createDealDTO.currency.uuid} not found`,
         400,
       );
     }
@@ -56,6 +69,7 @@ export class DealService {
     deal.account = account;
     deal.security = security;
     deal.currency = currency;
+    deal.portfolio = portfolio;
 
     return this.dealRepository.save(deal);
   }

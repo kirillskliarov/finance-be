@@ -2,7 +2,7 @@ import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Split } from '../appCore/entities/Split';
 import { Repository } from 'typeorm';
-import { CreateSplitDTO } from './DTOs/CreateSplitDTO';
+import { CreateSplitDTO } from '../appCore/DTOs/CreateSplitDTO';
 import { Security } from '../appCore/entities/Security';
 import { plainToClass } from 'class-transformer';
 

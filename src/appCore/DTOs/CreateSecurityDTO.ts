@@ -1,5 +1,5 @@
 import { IsEnum, IsNotEmpty, IsString } from 'class-validator';
-import { SecurityType } from '../../appCore/entities/SecurityType';
+import { SecurityType } from '../entities/SecurityType';
 
 export class CreateSecurityDTO {
   @IsNotEmpty()

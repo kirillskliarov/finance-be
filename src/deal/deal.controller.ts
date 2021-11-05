@@ -3,7 +3,7 @@ import { DealService } from './deal.service';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
 import { Deal } from '../appCore/entities/Deal';
-import { CreateDealDTO } from './DTOs/CreateDealDTO';
+import { CreateDealDTO } from '../appCore/DTOs/CreateDealDTO';
 
 @Controller('deal')
 export class DealController {

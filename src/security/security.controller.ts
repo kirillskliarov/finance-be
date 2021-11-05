@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { SecurityService } from './security.service';
 import { Security } from '../appCore/entities/Security';
-import { CreateSecurityDTO } from './DTOs/CreateSecurityDTO';
-import { FindSecurityDTO } from './DTOs/FindSecurityDTO';
+import { CreateSecurityDTO } from '../appCore/DTOs/CreateSecurityDTO';
+import { FindSecurityDTO } from '../appCore/DTOs/FindSecurityDTO';
 
 @Controller('security')
 export class SecurityController {

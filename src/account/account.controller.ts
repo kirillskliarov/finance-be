@@ -1,6 +1,6 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
 import { Account } from '../appCore/entities/Account';
-import { CreateAccountDTO } from './DTOs/CreateAccountDTO';
+import { CreateAccountDTO } from '../appCore/DTOs/CreateAccountDTO';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
 import { AccountService } from './account.service';

@@ -2,7 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { Repository } from 'typeorm';
 import { Broker } from '../appCore/entities/Broker';
 import { InjectRepository } from '@nestjs/typeorm';
-import { CreateBrokerDTO } from './DTOs/CreateBrokerDTO';
+import { CreateBrokerDTO } from '../appCore/DTOs/CreateBrokerDTO';
 import { plainToClass } from 'class-transformer';
 
 @Injectable()

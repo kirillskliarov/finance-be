@@ -1,11 +1,11 @@
 import { Body, Controller, Post } from '@nestjs/common';
 import { InOutService } from './in-out.service';
-import { CreateAccountDTO } from '../account/DTOs/CreateAccountDTO';
+import { CreateAccountDTO } from '../appCore/DTOs/CreateAccountDTO';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
 import { Account } from '../appCore/entities/Account';
 import { InOut } from '../appCore/entities/InOut';
-import { CreateInOutDTO } from './DTOs/CreateInOutDTO';
+import { CreateInOutDTO } from '../appCore/DTOs/CreateInOutDTO';
 
 @Controller('in-out')
 export class InOutController {
