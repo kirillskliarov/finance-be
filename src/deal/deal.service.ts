@@ -84,16 +84,15 @@ export class DealService {
     if (accounts.length === 0) {
       return [];
     }
-    debugger;
     const deals = await this.dealRepository.find({
       where: {
-        account: In(accounts),
+        account: In(accounts.map((account: Account) => account.id)),
       },
+      relations: ['account', 'portfolio', 'security', 'currency'],
       order: {
         dateTime: 'ASC',
       },
     });
-    debugger;
     return deals;
   }
 }

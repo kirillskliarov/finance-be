@@ -63,21 +63,25 @@ export class Deal {
   @ManyToOne(() => Account, (account: Account) => account.deals, {
     nullable: false,
   })
+  @Expose()
   account: Account;
 
   @ManyToOne(() => Portfolio, (portfolio: Portfolio) => portfolio.deals, {
     nullable: false,
   })
+  @Expose()
   portfolio: Portfolio;
 
   @ManyToOne(() => Security, (security: Security) => security.incomeDeals, {
     nullable: false,
   })
+  @Expose()
   security: Security;
 
   @ManyToOne(() => Security, (security: Security) => security.outcomeDeals, {
     nullable: false,
   })
+  @Expose()
   currency: Security;
 
   getTotal(): number {
