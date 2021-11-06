@@ -84,7 +84,8 @@ export class DealService {
     if (accounts.length === 0) {
       return [];
     }
-    const deals = await this.dealRepository.find({
+
+    return this.dealRepository.find({
       where: {
         account: In(accounts.map((account: Account) => account.id)),
       },
@@ -93,6 +94,5 @@ export class DealService {
         dateTime: 'ASC',
       },
     });
-    return deals;
   }
 }

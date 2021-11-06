@@ -32,4 +32,10 @@ export class SplitService {
 
     return this.splitRepository.save(split);
   }
+
+  async getAll(): Promise<Split[]> {
+    return this.splitRepository.find({
+      relations: ['security'],
+    });
+  }
 }

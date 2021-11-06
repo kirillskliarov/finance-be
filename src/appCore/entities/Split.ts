@@ -29,7 +29,7 @@ export class Split {
   })
   @Expose()
   @Transform(dateTimeTransformer)
-  date: DateTime;
+  dateTime: DateTime;
 
   @Column({
     nullable: false,
@@ -38,5 +38,6 @@ export class Split {
   value: number;
 
   @ManyToOne(() => Security, (security: Security) => security.splits)
+  @Expose()
   security: Security;
 }

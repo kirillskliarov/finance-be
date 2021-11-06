@@ -1,7 +1,5 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { SplitService } from './split.service';
-import { CreateSecurityDTO } from '../appCore/DTOs/CreateSecurityDTO';
-import { Security } from '../appCore/entities/Security';
 import { CreateSplitDTO } from '../appCore/DTOs/CreateSplitDTO';
 import { Split } from '../appCore/entities/Split';
 
@@ -12,5 +10,10 @@ export class SplitController {
   @Post()
   async create(@Body() createSplitDTO: CreateSplitDTO): Promise<Split> {
     return this.splitService.create(createSplitDTO);
+  }
+
+  @Get()
+  async getAll(): Promise<Split[]> {
+    return this.splitService.getAll();
   }
 }
