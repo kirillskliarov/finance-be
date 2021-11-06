@@ -1,4 +1,4 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post } from '@nestjs/common';
 import { DealService } from './deal.service';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
@@ -15,5 +15,12 @@ export class DealController {
     @CurrentUser() user: User,
   ): Promise<Deal> {
     return this.dealService.create(createDealDTO, user);
+  }
+
+  @Get()
+  async find(
+    @CurrentUser() user: User,
+  ): Promise<Deal[]> {
+    return this.dealService.find(user);
   }
 }

@@ -1,7 +1,7 @@
 import { HttpException, Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Deal } from '../appCore/entities/Deal';
-import { Repository } from 'typeorm';
+import { In, Repository } from 'typeorm';
 import { CreateDealDTO } from '../appCore/DTOs/CreateDealDTO';
 import { User } from '../appCore/entities/User';
 import { Account } from '../appCore/entities/Account';
@@ -76,20 +76,24 @@ export class DealService {
 
   async find(user: User): Promise<Deal[]> {
     const accounts = await this.accountRepository.find({
-      user,
+      where: {
+        user,
+      },
     });
 
     if (accounts.length === 0) {
       return [];
     }
-
-    return this.dealRepository.find({
+    debugger;
+    const deals = await this.dealRepository.find({
       where: {
-        account: accounts,
+        account: In(accounts),
       },
       order: {
         dateTime: 'ASC',
       },
     });
+    debugger;
+    return deals;
   }
 }
