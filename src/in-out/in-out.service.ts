@@ -19,12 +19,12 @@ export class InOutService {
   async create(createInOutDTO: CreateInOutDTO, user: User): Promise<InOut> {
     const account: Account | undefined = await this.accountRepository.findOne({
       user,
-      uuid: createInOutDTO.accountUUID,
+      uuid: createInOutDTO.account.uuid,
     });
 
     if (!account) {
       throw new HttpException(
-        `Account UUID ${createInOutDTO.accountUUID} not found`,
+        `Account UUID ${createInOutDTO.account.uuid} not found`,
         400,
       );
     }

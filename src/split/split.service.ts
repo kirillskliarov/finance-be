@@ -17,12 +17,12 @@ export class SplitService {
 
   async create(createSplitDTO: CreateSplitDTO): Promise<Split> {
     const security = await this.securityRepository.findOne({
-      uuid: createSplitDTO.securityUUID,
+      uuid: createSplitDTO.security.uuid,
     });
 
     if (!security) {
       throw new HttpException(
-        `Security UUID ${createSplitDTO.securityUUID} not found`,
+        `Security UUID ${createSplitDTO.security.uuid} not found`,
         400,
       );
     }

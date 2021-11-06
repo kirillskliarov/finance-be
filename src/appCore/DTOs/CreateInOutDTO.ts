@@ -1,11 +1,13 @@
-import { IsNotEmpty, IsNumber, IsUUID } from 'class-validator';
+import { IsNotEmpty, IsNumber, ValidateNested } from 'class-validator';
+import { Type } from 'class-transformer';
+import { BaseDTO } from './BaseDTO';
 
 export class CreateInOutDTO {
   @IsNotEmpty()
   @IsNumber()
-  amount: string;
+  amount: number;
 
-  @IsNotEmpty()
-  @IsUUID()
-  accountUUID: string;
+  @ValidateNested()
+  @Type(() => BaseDTO)
+  account: BaseDTO;
 }

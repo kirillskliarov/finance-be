@@ -1,16 +1,17 @@
-import { IsNotEmpty, IsNumber, IsDateString, IsUUID } from 'class-validator';
-import { DateTime } from 'luxon';
+import { IsNotEmpty, IsNumber, IsDateString, ValidateNested } from 'class-validator';
+import { BaseDTO } from './BaseDTO';
+import { Type } from 'class-transformer';
 
 export class CreateSplitDTO {
   @IsNotEmpty()
   @IsNumber()
-  amount: string;
+  value: number;
 
   @IsNotEmpty()
   @IsDateString()
-  date: DateTime;
+  dateTime: string;
 
-  @IsNotEmpty()
-  @IsUUID()
-  securityUUID: string;
+  @ValidateNested()
+  @Type(() => BaseDTO)
+  security: BaseDTO;
 }
