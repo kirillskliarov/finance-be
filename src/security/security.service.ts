@@ -1,7 +1,7 @@
 import { Injectable } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Security } from '../appCore/entities/Security';
-import { ILike, Like, Repository } from 'typeorm';
+import { Repository } from 'typeorm';
 import { CreateSecurityDTO } from '../appCore/DTOs/CreateSecurityDTO';
 import { plainToClass } from 'class-transformer';
 import { FindSecurityDTO } from '../appCore/DTOs/FindSecurityDTO';
@@ -19,22 +19,24 @@ export class SecurityService {
   }
 
   async find(findSecurityDTO: FindSecurityDTO): Promise<Security[]> {
-    const where: Record<string, any> = {};
-    for (const key in findSecurityDTO) {
-      switch (key) {
-        case 'secidLike': {
-          const value = findSecurityDTO['secidLike'];
-          where.secid = ILike(`%${value}%`);
-          break;
-        }
-        case 'type': {
-          where.type = findSecurityDTO['type'];
-          break;
-        }
-      }
+    const queryBuilder = this.securityRepository
+      .createQueryBuilder('security')
+      .select(['uuid', 'secid', 'type'])
+      .orderBy('security.type', 'ASC')
+      .addOrderBy('security.secid', 'ASC');
+
+    if (findSecurityDTO.secidLike) {
+      queryBuilder.andWhere('security.secid ilike :secid', {
+        secid: `%${findSecurityDTO.secidLike}%`,
+      });
     }
-    return this.securityRepository.find({
-      where: where,
-    });
+
+    if (findSecurityDTO.type) {
+      queryBuilder.andWhere('security.type = :type', {
+        type: findSecurityDTO.type,
+      });
+    }
+
+    return plainToClass(Security, <any[]>await queryBuilder.execute());
   }
 }
