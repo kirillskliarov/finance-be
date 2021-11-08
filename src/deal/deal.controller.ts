@@ -1,9 +1,11 @@
-import { Body, Controller, Get, Post } from '@nestjs/common';
+import { Body, Controller, Get, Post, Query } from '@nestjs/common';
 import { DealService } from './deal.service';
 import { CurrentUser } from '../appCore/decorators/CurrentUser.decorator';
 import { User } from '../appCore/entities/User';
 import { Deal } from '../appCore/entities/Deal';
 import { CreateDealDTO } from '../appCore/DTOs/CreateDealDTO';
+import { FindSecurityDTO } from '../appCore/DTOs/FindSecurityDTO';
+import { FindDealDTO } from '../appCore/DTOs/FindDealDTO';
 
 @Controller('deal')
 export class DealController {
@@ -20,7 +22,8 @@ export class DealController {
   @Get()
   async find(
     @CurrentUser() user: User,
+    @Query() findDealDTO: FindDealDTO,
   ): Promise<Deal[]> {
-    return this.dealService.find(user);
+    return this.dealService.find(user, findDealDTO);
   }
 }

@@ -29,11 +29,11 @@ export class PortfolioController {
     return this.portfolioService.getAll(user);
   }
 
-  // @Get(':uuid')
-  // async getByUUID(
-  //   @Param('uuid', ParseUUIDPipe) uuid: string,
-  //   @CurrentUser() user: User,
-  // ): Promise<Portfolio> {
-  //   return this.portfolioService.getByUUID(uuid, user);
-  // }
+  @Get(':uuid')
+  async getByUUID(
+    @Param('uuid', ParseUUIDPipe) uuid: string,
+    @CurrentUser() user: User,
+  ): Promise<Portfolio> {
+    return this.portfolioService.getByUUID(uuid, user);
+  }
 }

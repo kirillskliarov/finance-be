@@ -9,6 +9,10 @@ import { Security } from '../appCore/entities/Security';
 import { plainToClass } from 'class-transformer';
 import { SecurityType } from '../appCore/entities/SecurityType';
 import { Portfolio } from '../appCore/entities/Portfolio';
+import { FindManyOptions } from 'typeorm/find-options/FindManyOptions';
+import { FindDealDTO } from '../appCore/DTOs/FindDealDTO';
+import { FindConditions } from 'typeorm/find-options/FindConditions';
+import { ObjectLiteral } from 'typeorm/common/ObjectLiteral';
 
 @Injectable()
 export class DealService {
@@ -74,7 +78,7 @@ export class DealService {
     return this.dealRepository.save(deal);
   }
 
-  async find(user: User): Promise<Deal[]> {
+  async find(user: User, findDealDTO: FindDealDTO): Promise<Deal[]> {
     const accounts = await this.accountRepository.find({
       where: {
         user,
@@ -85,10 +89,27 @@ export class DealService {
       return [];
     }
 
+    const dealWhere: ObjectLiteral = {
+      account: In(accounts.map((account: Account) => account.id)),
+    };
+
+    if (findDealDTO.portfolioUUID) {
+      const portfolio = await this.portfolioRepository.findOne({
+        where: {
+          uuid: findDealDTO.portfolioUUID,
+        },
+      });
+      if (!portfolio) {
+        throw new HttpException(
+          `Portfolio UUID ${findDealDTO.portfolioUUID} not found`,
+          400,
+        );
+      }
+      dealWhere.portfolio = portfolio;
+    }
+
     return this.dealRepository.find({
-      where: {
-        account: In(accounts.map((account: Account) => account.id)),
-      },
+      where: dealWhere,
       relations: ['account', 'portfolio', 'security', 'currency'],
       order: {
         dateTime: 'ASC',
